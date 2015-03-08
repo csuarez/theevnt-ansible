@@ -1,0 +1,13 @@
+---
+- name: install php-fpm
+  yum: name=php-fpm state=latest
+
+- name: install php-packages
+  yum: name={{ item }} state=latest
+  with_items: php_packages
+
+- name: copy www.conf
+  template: src=www.conf dest=/etc/php-fpm.d/www.conf
+
+- name: start service
+  service: name=php-fpm state=started

@@ -1,0 +1,13 @@
+---
+- name: check if git is installed
+  yum: name=git state=latest
+
+- name: download from git
+  git: repo=https://github.com/WordPress/WordPress.git dest={{ wordpress_path }}
+
+- name: check db
+  mysql_db: name={{ wordpress_db }} state=present login_user=root login_password=
+
+- name: copy base config file
+  template: src=wp-config.php dest={{ wordpress_path }}/wp-config.php
+  notify: restart nginx

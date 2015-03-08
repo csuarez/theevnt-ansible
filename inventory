@@ -1,0 +1,2 @@
+[demo]
+188.166.10.162 ansible_ssh_user=root

@@ -1,0 +1,9 @@
+---
+- name: add repo
+  yum: name=http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm state=present
+
+- name: install package
+  yum: name=mysql-server state=latest
+
+- name: start service
+  service: name=mysqld state=restarted

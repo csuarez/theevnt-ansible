@@ -1,0 +1,7 @@
+---
+- name: enabling epel
+  yum: name=epel-release state=latest
+
+- name: install base packages
+  yum: name={{ item }} state=latest
+  with_items: centos_base_packages

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  sudo: true
+
+  roles:
+    - {role: centos, centos_base_packages: [MySQL-python] }
+    - nginx
+    - mysql
+    - { role: php, php_packages: [php-mysql], php_user: nginx, php_group: nginx }
+    - wordpress
