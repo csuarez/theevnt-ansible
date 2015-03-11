@@ -1,2 +1,3 @@
+#file: roles/centos/defaults/main.yml
 ---
 centos_base_packages: []

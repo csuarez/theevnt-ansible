@@ -1,3 +1,4 @@
+#file: roles/wordpress/tasks/main.yml
 ---
 - name: check if git is installed
   yum: name=git state=latest

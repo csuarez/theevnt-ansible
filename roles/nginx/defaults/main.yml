@@ -1,2 +1,3 @@
+#file: roles/nginx/defaults/main.yml
 ---
 nginx_root: /usr/share/nginx/html

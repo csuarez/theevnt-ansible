@@ -1,3 +1,4 @@
+#file: roles/wordpress/meta/main.yml
 dependencies:
   - {role: php, php_packages: [php-xml, php-gd, php-mbstring]}
   - {role: nginx, nginx_root: /usr/share/nginx/html/wordpress}
