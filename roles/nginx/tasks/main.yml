@@ -4,7 +4,8 @@
   yum: name=nginx state=latest
 
 - name: start service
-#  service: name=nginx.service state=started
+# service: name=nginx.service state=started
+# WARNING: ¡ÑAPA!
   shell: systemctl start nginx
 
 - name: copy base config file
