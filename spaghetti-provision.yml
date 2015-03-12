@@ -1,0 +1,74 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    nginx_root: /usr/share/nginx/html/wordpress
+    php_packages: [php-xml, php-gd, php-mbstring, php-mysql]
+    php_user: apache
+    php_group: apache
+    wordpress_path: /usr/share/nginx/html/wordpress
+    wordpress_db: wordpress
+  tasks:
+  - name: enabling epel
+    yum: name=epel-release state=latest
+
+  - name: install mysql support for python
+    yum: name=MySQL-python state=latest
+
+  - name: install package
+    yum: name=nginx state=latest
+
+  - name: start service
+    # service: name=nginx.service state=started
+    # WARNING: ¡ÑAPA!
+    shell: systemctl start nginx
+
+  - name: copy base config file
+    copy: src=roles/nginx/files/nginx.conf dest=/etc/nginx/nginx.conf
+    notify: restart nginx
+
+  - name: copy default config file
+    template: src=roles/nginx/templates/default.conf dest=/etc/nginx/conf.d/default.conf
+    notify: restart nginx
+
+  - name: add repo
+    yum: name=http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm state=present
+
+  - name: install package
+    yum: name=mysql-server state=latest
+
+  - name: start service
+    service: name=mysqld state=restarted
+
+  - name: install php-fpm
+    yum: name=php-fpm state=latest
+
+  - name: install php packages
+    yum: name={{ item }} state=latest
+    with_items: php_packages
+
+  - name: copy www.conf
+    template: src=roles/php/templates/www.conf dest=/etc/php-fpm.d/www.conf
+
+  - name: start service
+    service: name=php-fpm state=started
+
+  - name: check if git is installed
+    yum: name=git state=latest
+
+  - name: download from git
+    git: repo=https://github.com/WordPress/WordPress.git dest={{ wordpress_path }}
+
+  - name: check db
+    mysql_db: name={{ wordpress_db }} state=present login_user=root login_password=
+
+  - name: copy base config file
+    template: src=roles/wordpress/templates/wp-config.php dest={{ wordpress_path }}/wp-config.php
+    notify: restart nginx
+
+
+  handlers:
+  - name: restart nginx
+    #service: name=nginx state=restarted
+    shell: systemctl restart nginx
+

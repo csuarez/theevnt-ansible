@@ -1,4 +1,4 @@
-#file: provision.yml
+#provision.yml
 ---
 - hosts: all
   sudo: true

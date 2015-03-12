@@ -1,9 +1,9 @@
-#file: roles/php/tasks/main.yml
+#roles/php/tasks/main.yml
 ---
 - name: install php-fpm
   yum: name=php-fpm state=latest
 
-- name: install php-packages
+- name: install php packages
   yum: name={{ item }} state=latest
   with_items: php_packages
 

@@ -1,5 +1,5 @@
-#file: roles/nginx/handlers/main.yml
+#roles/nginx/handlers/main.yml
 ---
 - name: restart nginx
-#  service: name=nginx state=restarted
+  #service: name=nginx state=restarted
   shell: systemctl restart nginx
