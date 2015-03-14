@@ -1,4 +1,4 @@
-#file: roles/nginx/tasks/main.yml
+#roles/nginx/tasks/main.yml
 ---
 - name: install package
   yum: name=nginx state=latest

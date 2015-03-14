@@ -1,3 +1,2 @@
 [demo]
-46.101.61.10 ansible_ssh_user=root
 45.55.187.103 ansible_ssh_user=root

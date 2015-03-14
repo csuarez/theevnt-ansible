@@ -1,4 +1,4 @@
-#file: roles/php/defaults/main.yml
+#roles/php/defaults/main.yml
 ---
 php_packages: []
 php_user: apache
