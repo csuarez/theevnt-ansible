@@ -4,6 +4,6 @@ Presentación disponible en: https://speakerdeck.com/csuarez/automatizacion-de-t
 
 ## Método de ejecución
 
-´´´sh
+```sh
 $ ansible-playbook demo -i inventory <provision.yml>
-´´´
+```
